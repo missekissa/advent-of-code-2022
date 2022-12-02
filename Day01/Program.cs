@@ -26,6 +26,5 @@ namespace Day01
 
         private static int Part2(List<int> sums) =>
             sums.OrderByDescending(x => x).Take(3).Sum();
-
     }
 }
