@@ -1,8 +1,6 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Lib;
+using System.Runtime.CompilerServices;
 
-using Lib;
-
-//string path = "Example.txt";
 string path = "Input.txt";
 
 List<List<string>> rucksacks = path.ReadInput().ParseInput(Environment.NewLine).Select(x => getCompartments(x).ToList()).ToList();;
@@ -14,7 +12,15 @@ string priorities = string.Concat("0", lowercaseItems, uppercaseItems);
 int silver = rucksacks.Select(x => FindItem(x[0], x[1]))
     .Select(x => priorities.IndexOf(x)).Sum();
 
+var part2 = path.ReadInput().ParseInput(Environment.NewLine).ToList();
+
+var test = ParseGroups(part2).Select(x => FindBadge(x)).ToList();
+
+var gold = ParseGroups(part2).Select(x => FindBadge(x))
+    .Select(x => priorities.IndexOf(x)).Sum();
+
 Console.WriteLine(silver);
+Console.WriteLine(gold);
 
 
 static List<string> getCompartments(string rucksack)
@@ -33,3 +39,20 @@ static char FindItem(string firstRucksack, string secondRucksack, int index = 0)
     return FindItem(firstRucksack, secondRucksack, index + 1);       
 }
 
+static IEnumerable<IEnumerable<string>> ParseGroups(List<string> rucksacks)
+{
+    for (int i = 0; i < rucksacks.Count; i += 3)
+    {
+        yield return rucksacks.GetRange(i, 3);
+    }
+}
+
+static char FindBadge(IEnumerable<string> group, int i = 0)
+{
+    char item = group.First()[i];
+
+    if (group.Skip(1).All(x => x.Contains(item)))
+        return item;
+
+    return FindBadge(group, i + 1);
+}
