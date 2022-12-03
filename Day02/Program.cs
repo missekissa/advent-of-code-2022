@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Text;
 
 string path = "Input.txt";
-//string path = "Example.txt";
 
 List<string> rounds = path.ReadInput().ParseInput(Environment.NewLine).ToList();
 
@@ -20,12 +19,8 @@ Dictionary<char, int> scores = new Dictionary<char, int>()
 
 int silver = rounds.Select(x => RoundResult(x, scores) + scores[x[2]]).Sum();
 
-//var gold = rounds.Select(x => x.Remove(2).Insert(2, Action(x, scores).ToString()));
 var decrypt = rounds.Select(x => new string($"{x[0]} {Action(x, scores)}"));
 int gold = decrypt.Select(x => RoundResult(x, scores) + scores[x[2]]).Sum();
-
-
-//int total = gold.Select(x => RoundResult(x, scores) + scores[x[2]]).Sum();
 
 Console.WriteLine(silver);
 Console.WriteLine(gold);
@@ -63,8 +58,6 @@ static char Win(string line, Dictionary<char, int> scores)
         return 'B';
 
     return 'C';
-
-    return scores.Single(x => x.Value > opponent).Key; //Väärin, koska 1 täyttää 2 ja 3     
 }
 
 static char Lose(string line, Dictionary<char, int> scores)
@@ -79,8 +72,6 @@ static char Lose(string line, Dictionary<char, int> scores)
         return 'A';
 
     return 'B';
-
-    return scores.Single(x => x.Value < opponent).Key; //Väärin koska 
 }
 
 static char Action(string line, Dictionary<char, int> scores)
