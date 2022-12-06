@@ -12,7 +12,9 @@ Regex lastNumber = new(@"\d$");
 int numberOfStacks = int.Parse(lastNumber.Match(input[0]).Value);
 
 var test = input[0].Split(Environment.NewLine);
-
+char test1 = test[2][1];
+char test2 = test[2][5];
+char test3 = test[2][9];
 
 Console.WriteLine(test);
 

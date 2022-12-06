@@ -8,5 +8,6 @@
         public static IEnumerable<string> ParseInput(this string input, string seperator) =>
             input.Split(seperator, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
 
+        //TODO kirjoita apumetodi jolla saa kaikki numerot merkkijonosta
     }
 }
