@@ -1,18 +1,18 @@
 ﻿using Lib;
 
 string path = "Input.txt";
-//string path = "Example.txt";
-
 string input = path.ReadInput();
 
-int silver = Silver(input);
+int silver = FindMarker(input, 4);
+int gold = FindMarker(input, 14);
 
 Console.WriteLine(silver);
+Console.WriteLine(gold);
 
-static int Silver(string input, int start = 0, int end = 4)
-{   
-    if (input.Skip(start).Take(end).Distinct().Count() == 4)
-        return start + end; 
+static int FindMarker(string input, int length, int index = 0) 
+{    
+    if (input.Skip(index).Take(length).Distinct().Count() == length)
+        return index + length; 
 
-    return Silver(input, start + 1, end);
+    return FindMarker(input, length, index + 1);
 }
